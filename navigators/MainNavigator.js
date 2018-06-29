@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import TrackScreen from '../screens/TrackScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import AccountScreen from '../screens/AccountScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const MainNavigator = createBottomTabNavigator({
   HomeScreen: {
@@ -23,7 +24,7 @@ const MainNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Track',
       tabBarIcon: ({tintColor}) => (
-        <Icon name='motorcycle' color={tintColor} size={24} />
+        <Icon name='directions-bike' color={tintColor} size={24} />
       )
     },
   },
@@ -36,18 +37,18 @@ const MainNavigator = createBottomTabNavigator({
       )
     },
    },
-  AccountScreen: {
-    screen: AccountScreen,
+   SettingsScreen: {
+    screen: SettingsScreen,
     navigationOptions: {
-      tabBarLabel: 'My account',
+      tabBarLabel: 'Settings',
       tabBarIcon: ({tintColor}) => (
-        <Icon name='people' color={tintColor} size={24} />
+        <Icon name='settings' color={tintColor} size={24} />
       )
     },
   },
 }, {
   tabBarOptions: {
-    activeTintColor: 'red',
+    activeTintColor: 'green',
     inactiveTintColor: 'grey',
     style: {
       backgroundColor: 'white',
