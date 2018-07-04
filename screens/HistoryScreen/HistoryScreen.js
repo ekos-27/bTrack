@@ -60,7 +60,7 @@ export default class HistoryScreen extends React.Component {
             {
               this.list.map((l, i) => (
                 <ListItem
-                  leftIcon={{name: 'explore', style: styles.leftIconStyle}}
+                  leftIcon={{name: 'map-marker', type: 'font-awesome' , style: styles.leftIconStyle}}
                   key={i}
                   title={l.date}
                   subtitle={l.subtitle}
