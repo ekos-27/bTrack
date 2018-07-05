@@ -1,5 +1,5 @@
 const initialState = [];
 
-function history(state = initialState, action) {
+export default (state = initialState, action) => {
   return state;
 }
