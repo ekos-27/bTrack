@@ -16,7 +16,7 @@ class HistoryList extends Component {
     return history.map((item) => (
       {
         date: moment(item.startDate).format('DD-MM-YYYY'),
-        subtitle: `Time: ${moment(moment(item.startDate).diff(item.endDate)).format('HH:mm:ss')}, Distance: 3.1 km`
+        subtitle: `Time: ${moment.utc(moment(item.endDate).diff(item.startDate)).format('HH:mm:ss')}, Distance: 3.1 km`
       })
     );
   };
