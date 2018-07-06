@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  iconStyle: {
+    color: 'green',
+    fontSize: 24,
+  },
 });
 
 export default styles;

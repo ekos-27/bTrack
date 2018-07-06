@@ -50,6 +50,8 @@ class Map extends Component {
       track
     } = this.props.training;
 
+    const {color} = styles.iconStyle;
+
     return (
       <MapView
         style={styles.mapStyle}
@@ -61,13 +63,18 @@ class Map extends Component {
           longitudeDelta: 0.0034
         }}>
 
-        <Polyline coordinates={track} />
+        <Polyline 
+          strokeWidth={4}
+          strokeColor='green'
+          coordinates={track} />
 
         <Marker.Animated coordinate={{
           latitude: currentCoords.latitude,
           longitude: currentCoords.longitude
         }}>
-          <Icon name='directions-bike' size={24} />
+          <Icon name='directions-bike'
+            color='green'
+            size={24} />
         </Marker.Animated>
       </MapView>
     );
