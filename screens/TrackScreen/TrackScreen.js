@@ -7,11 +7,6 @@ import Map from '../../components/Map';
 import TrackStatus from '../../components/TrackStatus';
 
 export default class TrackScreen extends Component {
-  state = {
-    location: null,
-    errorMessage: null,
-  };
-
   render() {
     return (
       <View style={styles.containerStyle}>
