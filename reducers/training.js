@@ -43,7 +43,8 @@ export default (state = initialState, action) => {
     case FINISH_TRAINING: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        track: []
       };
     }
     default:

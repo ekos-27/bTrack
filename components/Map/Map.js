@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Animated } from 'react-native';
 import { Icon } from 'react-native-elements';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import { Constants, Location, Permissions } from 'expo';
 import styles from './styles';
 
@@ -22,24 +23,21 @@ class Map extends Component {
       });
     }
 
-    let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
-    this.setState({ location });
-
     this._watchPositionAsync();
   };
 
   _watchPositionAsync() {
     Location.watchPositionAsync({ 
       enableHighAccuracy: true,
-      timeInterval: 300,
+      distanceInterval: 2,
     }, location => {
       let coords = {
         latitude: 0,
         longitude: 0,
       };
   
-      if (this.state.location) {
-        coords = this.state.location.coords;
+      if (location) {
+        coords = { ...location.coords };
       }
 
       this.props.changePosition(coords);
@@ -48,7 +46,8 @@ class Map extends Component {
 
   render() {
     const {
-      currentCoords
+      currentCoords,
+      track
     } = this.props.training;
 
     return (
@@ -62,12 +61,14 @@ class Map extends Component {
           longitudeDelta: 0.0034
         }}>
 
-        <Marker coordinate={{
+        <Polyline coordinates={track} />
+
+        <Marker.Animated coordinate={{
           latitude: currentCoords.latitude,
           longitude: currentCoords.longitude
         }}>
           <Icon name='directions-bike' size={24} />
-        </Marker>
+        </Marker.Animated>
       </MapView>
     );
   }
