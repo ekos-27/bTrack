@@ -11,7 +11,8 @@ import { connect } from 'react-redux';
 
 import { 
   startTraining,
-  finishTraining
+  finishTraining,
+  addHistory
 } from '../../actions';
 
 class TrackStatus extends Component {
@@ -44,9 +45,18 @@ class TrackStatus extends Component {
           buttonStyle={[styles.buttonStyle, (!status ? styles.startButtonStyle : styles.finishButtonStyle)]}
           onPress={() => {
             if (!status) {
-              this.props.startTraining();
+              this.props.startTraining({
+                status: true,
+                startDate: new Date(),
+              });
             } else {
-              this.props.finishTraining();
+              const  finishState = {
+                status: false,
+                endDate: new Date(),
+              };
+
+              this.props.finishTraining(finishState);
+              this.props.addHistory({...this.props.training, ...finishState});
             }
           }}
         />
@@ -62,5 +72,6 @@ export default connect(
   {
     startTraining,
     finishTraining,
+    addHistory
   }
 )(TrackStatus);

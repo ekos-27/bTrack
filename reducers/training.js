@@ -37,15 +37,13 @@ export default (state = initialState, action) => {
     case START_TRAINING: {
       return {
         ...state,
-        status: true,
-        starDate: new Date(),
+        ...action.payload
       };
     }
     case FINISH_TRAINING: {
       return {
         ...state,
-        status: false,
-        endDate: new Date(),
+        ...action.payload
       };
     }
     default:
