@@ -13,7 +13,7 @@ class HistoryList extends Component {
   getHistorylist = () => {
     const { history } =  this.props;
     
-    return history.map((item) => (
+    return [...history].reverse().map((item) => (
       {
         date: moment(item.startDate).format('DD-MM-YYYY'),
         subtitle: `Time: ${moment.utc(moment(item.endDate).diff(item.startDate)).format('HH:mm:ss')}, Distance: 3.1 km`
