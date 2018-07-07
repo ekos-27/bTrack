@@ -4,6 +4,8 @@ import styles from './styles';
 
 import moment from 'moment';
 
+import { calculateDistance } from '../../utils';
+
 import { connect } from 'react-redux';
 import { 
   removeHistory
@@ -16,7 +18,8 @@ class HistoryList extends Component {
     return [...history].reverse().map((item) => (
       {
         date: moment(item.startDate).format('DD-MM-YYYY'),
-        subtitle: `Time: ${moment.utc(moment(item.endDate).diff(item.startDate)).format('HH:mm:ss')}, Distance: 3.1 km`
+        subtitle: `Time: ${moment.utc(moment(item.endDate).diff(item.startDate)).format('HH:mm:ss')}, 
+        Distance: ${calculateDistance(item.track, {unit: 'km'})} km`
       })
     );
   };
