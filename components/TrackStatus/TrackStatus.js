@@ -7,6 +7,8 @@ import styles from './styles';
 
 import Timer from '../Timer';
 
+import { calculateDistance } from '../../utils';
+
 import { connect } from 'react-redux';
 
 import { 
@@ -40,10 +42,12 @@ class TrackStatus extends Component {
     }
   };
 
+
   render() {
     const {
       status,
-      startDate
+      startDate,
+      track
     } = this.props.training;
 
     return (
@@ -61,7 +65,7 @@ class TrackStatus extends Component {
           <View>
             <Text style={styles.labelStyle}>Distance</Text>
             <Text style={styles.valueStyle}>
-              { status ? '10' : '0'} km
+              { status ? calculateDistance(track, {unit: 'km'}) : '0'} km
             </Text>
           </View>
         </View>
