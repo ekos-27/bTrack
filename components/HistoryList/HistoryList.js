@@ -3,7 +3,7 @@ import { List, ListItem, Text } from 'react-native-elements'
 import styles from './styles';
 
 import moment from 'moment';
-
+пше
 import { calculateDistance } from '../../utils';
 
 import { connect } from 'react-redux';
