@@ -5,7 +5,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { Constants, Location, Permissions } from 'expo';
 import styles from './styles';
 
-import moment from 'moment';
+import Timer from '../Timer';
 
 import { connect } from 'react-redux';
 
@@ -16,30 +16,6 @@ import {
 } from '../../actions';
 
 class TrackStatus extends Component {
-  timer = null;
-
-  state = {
-    timerValue: '00:00:00'
-  };
-
-  startTimer = () => {
-    clearInterval(this.timer);
-
-    timer = setInterval(() => {
-      const { status, startDate, endDate } = this.props.training;
-      const timerValue = status ?
-        moment.utc(moment(new Date()).diff(startDate)).format('HH:mm:ss') :
-        '00:00:00';
-
-      this.setState({
-        timerValue
-      });
-    }, 300);
-  };
-
-  finishTimer = () => {
-    clearInterval(this.timer);
-  };
 
   onPressButton = () => {
     const {
@@ -49,7 +25,6 @@ class TrackStatus extends Component {
     } = this.props.training;
 
     if (!status) {
-      this.startTimer();
       this.props.startTraining({
         status: true,
         startDate: new Date(),
@@ -62,26 +37,26 @@ class TrackStatus extends Component {
 
       this.props.finishTraining(finishState);
       this.props.addHistory({...this.props.training, ...finishState});
-
-      this.finishTimer();
     }
   };
 
   render() {
     const {
-      status
+      status,
+      startDate
     } = this.props.training;
-
-    const { timerValue } = this.state;
 
     return (
       <View style={styles.buttonContainerStyle}>
         <View style={styles.valueContainerStyle}>
           <View>
             <Text style={styles.labelStyle}>Time</Text>
-            <Text style={styles.valueStyle}>
-              { timerValue }
-            </Text>
+            
+            <Timer
+              style={styles.valueStyle}
+              start={status}
+              startTime={startDate}
+            />
           </View>
           <View>
             <Text style={styles.labelStyle}>Distance</Text>
