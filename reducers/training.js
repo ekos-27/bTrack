@@ -12,6 +12,7 @@ const initialState = {
   currentCoords: {
     latitude: 0,
     longitude: 0,
+    speed: 0,
   },
 };
 
