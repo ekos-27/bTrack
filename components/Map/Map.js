@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
-import MapView, { Marker, Polyline } from 'react-native-maps';
+import MapView, { Marker, Polyline, UrlTile } from 'react-native-maps';
 import { Constants, Location, Permissions } from 'expo';
 import styles from './styles';
 
@@ -9,6 +9,9 @@ import { connect } from 'react-redux';
 import { 
   changePosition,
 } from '../../actions';
+
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
 
 class Map extends Component {
   componentWillMount() {
@@ -54,15 +57,21 @@ class Map extends Component {
 
     return (
       <MapView
+        mapType="none"
         style={styles.mapStyle}
         showsUserLocation={true}
         region={{
           latitude: currentCoords.latitude,
           longitude: currentCoords.longitude,
-          latitudeDelta: 0.0043,
-          longitudeDelta: 0.0034
+          latitudeDelta:  0.0922,
+          longitudeDelta:  0.0922 * ASPECT_RATIO,
         }}>
 
+        <UrlTile 
+          urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          zIndex={16}
+        />
+        
         <Polyline 
           strokeWidth={4}
           strokeColor='green'
