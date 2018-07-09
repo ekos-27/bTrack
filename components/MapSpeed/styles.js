@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     top: 80,
-    left: 10,
+    alignSelf: 'center',
   },
   valueStyle: {
     color: 'green',

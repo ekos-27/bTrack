@@ -5,13 +5,13 @@ import styles from './styles';
 
 import Timer from '../Timer';
 
-import { calculateDistance } from '../../utils';
+import { calculateDistance, formatSpeed } from '../../utils';
 
 import { connect } from 'react-redux';
 
 class CurentState extends Component {
   render() {
-    const { status, startDate, track } = this.props.training;
+    const { status, startDate, track, currentCoords } = this.props.training;
 
     return (
       <View style={styles.containerStyle}>
@@ -33,6 +33,10 @@ class CurentState extends Component {
         <View style={styles.rowStyle}>
           <Text style={styles.labelStyle}>Distance</Text>
           <Text style={styles.valueStyle}>{ status ? calculateDistance(track, {unit: 'km'}) : 0 } km</Text>
+        </View>
+        <View style={styles.rowStyle}>
+          <Text style={styles.labelStyle}>Speed</Text>
+          <Text style={styles.valueStyle}>{formatSpeed(currentCoords.speed)} km/h</Text>
         </View>
       </View>
     );

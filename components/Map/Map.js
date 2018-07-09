@@ -57,20 +57,14 @@ class Map extends Component {
 
     return (
       <MapView
-        mapType="none"
         style={styles.mapStyle}
         showsUserLocation={true}
         region={{
           latitude: currentCoords.latitude,
           longitude: currentCoords.longitude,
-          latitudeDelta:  0.0922,
-          longitudeDelta:  0.0922 * ASPECT_RATIO,
+          latitudeDelta:  0.0044,
+          longitudeDelta:  0.0043,
         }}>
-
-        <UrlTile 
-          urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          zIndex={16}
-        />
         
         <Polyline 
           strokeWidth={4}

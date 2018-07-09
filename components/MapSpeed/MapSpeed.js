@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
 
+import { formatSpeed } from '../../utils';
+
 import { connect } from 'react-redux';
 
 class MapSpeed extends Component {
@@ -13,7 +15,7 @@ class MapSpeed extends Component {
     return (
       <View style={styles.containerStyle}>
         <Text style={styles.valueStyle}>
-            {Number(currentCoords.speed).toFixed(2)} km/h
+          {formatSpeed(currentCoords.speed)} km/h
         </Text>
       </View>
     );
@@ -26,4 +28,3 @@ export default connect(
   mapStateToProps,
   null
 )(MapSpeed);
-
