@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     backgroundColor: '#ffffff',
   },
-  iconStyle: {
-    color: 'green',
-    fontSize: 70,
+  imageStyle: {
+    height: 80,
+    width: 80,
   },
   labelStyle: {
     color: 'green',

@@ -3,7 +3,7 @@ import { Text, View, ScrollView } from 'react-native';
 import styles from './styles';
 
 import Header from '../../components/Header';
-import WeatherWidget from '../../components/WeatherWidget';
+import WeatherWidget from '../../containers/WeatherWidget';
 import CurrentState from '../../components/CurrentState';
 import BestResultWidget from '../../components/BestResultWidget';
 import BottomImage from '../../components/BottomImage';
