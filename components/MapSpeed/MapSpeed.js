@@ -9,12 +9,18 @@ import { connect } from 'react-redux';
 class MapSpeed extends Component {
   render() {
     const {
-      currentCoords
-    } = this.props.training;
+      training: { currentCoords },
+      settings: { colorScheme }
+    } = this.props;
+
+    const valueStyleList = [
+      styles.valueStyle,
+      { color: colorScheme }
+    ];
 
     return (
       <View style={styles.containerStyle}>
-        <Text style={styles.valueStyle}>
+        <Text style={valueStyleList}>
           {formatSpeed(currentCoords.speed)} km/h
         </Text>
       </View>
@@ -22,7 +28,7 @@ class MapSpeed extends Component {
   }
 }
 
-const mapStateToProps = ({ training }) => ({ training });
+const mapStateToProps = ({ training, settings }) => ({ training, settings });
 
 export default connect(
   mapStateToProps,

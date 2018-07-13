@@ -15,9 +15,7 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
   },
-  labelStyle: {
-    color: 'green',
-  }
+  labelStyle: {}
 });
 
 export default styles;

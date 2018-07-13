@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   valueStyle: {
-    color: 'green',
     fontSize: 24,
   },
 });

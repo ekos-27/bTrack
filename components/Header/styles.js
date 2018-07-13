@@ -14,10 +14,8 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     paddingRight: 10,
-    color: 'green',
   },
   labelStyle: {
-    color: 'green',
   }
 });
 

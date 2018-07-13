@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   iconStyle: {
-    color: 'green',
     fontSize: 24,
   },
 });

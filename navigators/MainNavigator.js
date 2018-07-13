@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -9,6 +9,8 @@ import HistoryScreen from '../screens/HistoryScreen';
 import AccountScreen from '../screens/AccountScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+import BottomTabBar from './BottomTabBar';
+
 const MainNavigator = createBottomTabNavigator({
   HomeScreen: {
     screen: HomeScreen,
@@ -16,7 +18,10 @@ const MainNavigator = createBottomTabNavigator({
       tabBarLabel: 'Home',
       tabBarIcon: ({tintColor}) => (
         <Icon name='home' color={tintColor} size={24} />
-      )
+      ),
+      tabBarOptions: {
+        activeTintColor: 'red',
+      }
     },
   },
   TrackScreen: {
@@ -38,27 +43,29 @@ const MainNavigator = createBottomTabNavigator({
     },
    },
    SettingsScreen: {
-    screen: SettingsScreen,
-    navigationOptions: {
-      tabBarLabel: 'Settings',
-      tabBarIcon: ({tintColor}) => (
-        <Icon name='settings' color={tintColor} size={24} />
-      )
-    },
+      screen: SettingsScreen,
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+        tabBarIcon: ({tintColor}) => (
+          <Icon name='settings' color={tintColor} size={24} />
+        )
+      },
+    }
   },
-}, {
-  tabBarOptions: {
-    activeTintColor: 'green',
-    inactiveTintColor: 'grey',
-    style: {
-      backgroundColor: 'white',
-      //borderTopWhidth: 0,
-      shadowOffset: { width: 5, height: 3 },
-      shadowColor: 'black',
-      shadowOpacity: 0.5,
-      elevation: 5
+  {
+    tabBarComponent: BottomTabBar,
+    tabBarOptions: {
+      inactiveTintColor: 'grey',
+      style: {
+        backgroundColor: 'white',
+        //borderTopWhidth: 0,
+        shadowOffset: { width: 5, height: 3 },
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        elevation: 5
+      }
     }
   }
-});
+);
 
 export default MainNavigator;

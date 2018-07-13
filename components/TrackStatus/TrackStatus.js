@@ -21,10 +21,8 @@ class TrackStatus extends Component {
 
   onPressButton = () => {
     const {
-      status,
-      startDate,
-      endDate,
-    } = this.props.training;
+      training: { status, startDate, endDate }
+    } = this.props;
 
     if (!status) {
       this.props.startTraining({
@@ -45,10 +43,19 @@ class TrackStatus extends Component {
 
   render() {
     const {
-      status,
-      startDate,
-      track
-    } = this.props.training;
+      training: { status, startDate, track },
+      settings: { colorScheme }
+    } = this.props;
+
+    const startButtonStyleList = [
+      styles.startButtonStyle,
+      { backgroundColor: colorScheme }
+    ]
+
+    const valueStyleList = [
+      styles.valueStyle,
+      { color: colorScheme }
+    ];
 
     return (
       <View style={styles.buttonContainerStyle}>
@@ -57,14 +64,14 @@ class TrackStatus extends Component {
             <Text style={styles.labelStyle}>Time</Text>
             
             <Timer
-              style={styles.valueStyle}
+              style={valueStyleList}
               start={status}
               startTime={startDate}
             />
           </View>
           <View>
             <Text style={styles.labelStyle}>Distance</Text>
-            <Text style={styles.valueStyle}>
+            <Text style={valueStyleList}>
               { status ? calculateDistance(track, {unit: 'km'}) : '0'} km
             </Text>
           </View>
@@ -72,7 +79,7 @@ class TrackStatus extends Component {
 
         <Button 
           title={ status ? 'Finish' : 'Start'}
-          buttonStyle={[styles.buttonStyle, (!status ? styles.startButtonStyle : styles.finishButtonStyle)]}
+          buttonStyle={[styles.buttonStyle, (!status ? startButtonStyleList : styles.finishButtonStyle)]}
           onPress={() => {
             this.onPressButton();
           }}
@@ -82,7 +89,7 @@ class TrackStatus extends Component {
   }
 }
 
-const mapStateToProps = ({ training }) => ({ training });
+const mapStateToProps = ({ training, settings }) => ({ training, settings });
 
 export default connect(
   mapStateToProps,

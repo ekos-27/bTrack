@@ -6,7 +6,7 @@ import styles from './styles';
 
 class HistoryDetails extends Component {
   render() {
-    const { track, currentCoords } = this.props.history;
+    const { color, history: { track, currentCoords } } = this.props;
 
     return (
       <MapView
@@ -21,7 +21,7 @@ class HistoryDetails extends Component {
         
         <Polyline 
           strokeWidth={4}
-          strokeColor='green'
+          strokeColor={color}
           coordinates={track} />
       </MapView>
     );

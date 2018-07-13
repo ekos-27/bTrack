@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   startButtonStyle: {
-    backgroundColor: "green",
   },
   finishButtonStyle: {
     backgroundColor: "red",
@@ -27,7 +26,6 @@ const styles = StyleSheet.create({
     color: '#aaaaaa',
   },
   valueStyle: {
-    color: 'green',
     fontSize: 26,
   },
   valueContainerStyle: {

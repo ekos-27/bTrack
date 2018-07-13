@@ -21,8 +21,6 @@ class HomeScreen extends Component {
           <CurrentState />
 
           <BestResultWidget />
-
-          <BottomImage />
         </ScrollView>
       </View>
     );

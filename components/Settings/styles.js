@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   inputStyle: {
-    color: 'green',
     height: 50,
   },
   labelStyle: {

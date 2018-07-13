@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
   valueStyle: {
     fontSize: 19,
-    color: 'green',
   },
   titleStyle: {
     textAlign: 'center',

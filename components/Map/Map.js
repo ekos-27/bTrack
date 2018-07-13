@@ -49,11 +49,9 @@ class Map extends Component {
 
   render() {
     const {
-      currentCoords,
-      track
-    } = this.props.training;
-
-    const {color} = styles.iconStyle;
+      training: { currentCoords, track },
+      settings: { colorScheme }
+    } = this.props;
 
     return (
       <MapView
@@ -66,17 +64,18 @@ class Map extends Component {
           longitudeDelta:  0.0043,
         }}>
         
-        <Polyline 
-          strokeWidth={4}
-          strokeColor='green'
-          coordinates={track} />
+          <Polyline 
+            strokeWidth={4}
+            strokeColor={colorScheme}
+            coordinates={track} />
 
-        <Marker.Animated coordinate={{
-          latitude: currentCoords.latitude,
-          longitude: currentCoords.longitude
-        }}>
+          <Marker.Animated coordinate={{
+            latitude: currentCoords.latitude,
+            longitude: currentCoords.longitude
+          }}>
+
           <Icon name='directions-bike'
-            color='green'
+            color={colorScheme}
             size={24} />
         </Marker.Animated>
       </MapView>
@@ -84,7 +83,7 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = ({ training }) => ({ training });
+const mapStateToProps = ({ training, settings }) => ({ training, settings });
 
 export default connect(
   mapStateToProps,

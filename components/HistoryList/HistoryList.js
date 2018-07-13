@@ -39,26 +39,41 @@ class HistoryList extends Component {
 
   render() {
     const { visible, selecetedHistory } = this.state;
+    const { settings: { colorScheme } } = this.props;
+
+    const listStyles = [
+      styles.listStyle,
+      { borderTopColor: colorScheme }
+    ];
+
+    const itemTitleStyles = [
+      styles.itemTitleStyle,
+      { color: colorScheme }
+    ];
+
+    const leftIconStyles = [
+      styles.leftIconStyle,
+      { color: colorScheme }
+    ];
 
     return (
       <View style={styles.containerStyle}>
-        <List containerStyle={styles.listStyle}>
+        <List containerStyle={listStyles}>
           {
             this.getHistorylist().map((l, i) => (
               <ListItem
-                leftIcon={{name: 'map-marker', type: 'font-awesome' , style: styles.leftIconStyle}}
+                leftIcon={{name: 'map-marker', type: 'font-awesome' , style: leftIconStyles}}
                 key={i}
                 title={l.date}
                 subtitle={l.subtitle}
-                titleStyle={styles.itemTitleStyle}
+                titleStyle={itemTitleStyles}
                 chevron={false}
-                rightIcon={{name: 'map', type: 'font-awesome' , style: styles.leftIconStyle}}
+                rightIcon={{name: 'map', type: 'font-awesome' , style: leftIconStyles}}
                 onPress={() => { this.setState({visible: true, selecetedHistory: l.selecetedHistory }) }}
               />
             ))
           }
         </List>
-
 
         <Modal 
           animationType="slide"
@@ -66,13 +81,13 @@ class HistoryList extends Component {
           visible={visible}
           onRequestClose={() => {}}>
 
-          <HistoryDetails history={selecetedHistory} />
+          <HistoryDetails history={selecetedHistory} color={colorScheme}/>
 
           <Icon
             raised
             name='close'
             type='font-awesome'
-            color='green'
+            color={colorScheme}
             size={24}
             containerStyle={styles.buttonStyle}
             onPress={() => this.hideModal()} />
@@ -83,7 +98,7 @@ class HistoryList extends Component {
   }
 }
 
-const mapStateToProps = ({ history }) => ({ history });
+const mapStateToProps = ({ history, settings }) => ({ history, settings });
 
 export default connect(
   mapStateToProps,
