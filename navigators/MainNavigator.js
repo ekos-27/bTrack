@@ -68,6 +68,11 @@ const MainNavigator = createBottomTabNavigator({
   },
   {
     tabBarComponent: BottomTabBar,
+    tabBarOptions: {
+      style: {
+        backgroundColor: '#ffffff',
+      },
+    }
   }
 );
 
