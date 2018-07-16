@@ -14,8 +14,6 @@ export default class HistoryScreen extends Component {
 
         <ScrollView>
 
-          <Text style={styles.titleStyle}>My History</Text>
-
           <HistoryList />
 
         </ScrollView>

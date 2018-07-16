@@ -1,27 +1,19 @@
 import {
-  CHANGE_NAME,
-  CHANGE_EMAIL,
+  CHANGE_LANGUAGE,
   CHANGE_COLOR_SCHEME
 } from '../actions/types';
 
 const initialState = {
   colorScheme: 'green',
-  name: 'Eugene',
-  email: 'ekos@ekos.by',
+  language: 'en'
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_NAME: {
+    case CHANGE_LANGUAGE: {
       return {
         ...state,
-        name: action.payload,
-      };
-    }
-    case CHANGE_EMAIL: {
-      return {
-        ...state,
-        email: action.email,
+        language: action.payload,
       };
     }
     case CHANGE_COLOR_SCHEME: {

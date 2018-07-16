@@ -11,6 +11,9 @@ import { calculateDistance } from '../../utils';
 
 import { connect } from 'react-redux';
 
+import { withTranslation } from '../../contexts/i18n';
+import translate from '../../dictionary';
+
 import { 
   startTraining,
   finishTraining,
@@ -43,6 +46,7 @@ class TrackStatus extends Component {
 
   render() {
     const {
+      lang,
       training: { status, startDate, track },
       settings: { colorScheme }
     } = this.props;
@@ -61,7 +65,7 @@ class TrackStatus extends Component {
       <View style={styles.buttonContainerStyle}>
         <View style={styles.valueContainerStyle}>
           <View>
-            <Text style={styles.labelStyle}>Time</Text>
+            <Text style={styles.labelStyle}>{translate(lang, 'Time')}</Text>
             
             <Timer
               style={valueStyleList}
@@ -70,15 +74,15 @@ class TrackStatus extends Component {
             />
           </View>
           <View>
-            <Text style={styles.labelStyle}>Distance</Text>
+            <Text style={styles.labelStyle}>{translate(lang, 'Distance')}</Text>
             <Text style={valueStyleList}>
-              { status ? calculateDistance(track, {unit: 'km'}) : '0'} km
+              { status ? calculateDistance(track, {unit: 'km'}) : '0'} {translate(lang, 'km')}
             </Text>
           </View>
         </View>
 
         <Button 
-          title={ status ? 'Finish' : 'Start'}
+          title={ translate(lang, (status ? 'Finish' : 'Start'))}
           buttonStyle={[styles.buttonStyle, (!status ? startButtonStyleList : styles.finishButtonStyle)]}
           onPress={() => {
             this.onPressButton();
@@ -98,4 +102,4 @@ export default connect(
     finishTraining,
     addHistory
   }
-)(TrackStatus);
+)(withTranslation(TrackStatus));

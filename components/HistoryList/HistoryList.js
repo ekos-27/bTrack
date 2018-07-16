@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { View, Modal } from 'react-native';
 import { List, ListItem, Text, Button, Icon } from 'react-native-elements'
-import styles from './styles';
-
 import moment from 'moment';
-
+import styles from './styles';
 import HistoryDetails from '../HistoryDetails';
 
 import { calculateDistance } from '../../utils';
 import { connect } from 'react-redux';
+
+import { withTranslation } from '../../contexts/i18n';
+import translate from '../../dictionary';
 
 import { 
   removeHistory
@@ -21,13 +22,13 @@ class HistoryList extends Component {
   }
 
   getHistorylist = () => {
-    const { history } =  this.props;
-    
+    const { history, lang } =  this.props;
+
     return [...history].reverse().map((item) => (
       {
         date: moment(item.startDate).format('DD-MM-YYYY'),
-        subtitle: `Time: ${moment.utc(moment(item.endDate).diff(item.startDate)).format('HH:mm:ss')}, 
-        Distance: ${calculateDistance(item.track, {unit: 'km'})} km`,
+        subtitle: `${translate(lang, 'Time')}: ${moment.utc(moment(item.endDate).diff(item.startDate)).format('HH:mm:ss')}, 
+        ${translate(lang, 'Distance')}: ${calculateDistance(item.track, {unit: 'km'})} ${translate(lang, 'km')}`,
         selecetedHistory: item,
       })
     );
@@ -39,7 +40,7 @@ class HistoryList extends Component {
 
   render() {
     const { visible, selecetedHistory } = this.state;
-    const { settings: { colorScheme } } = this.props;
+    const { lang, settings: { colorScheme } } = this.props;
 
     const listStyles = [
       styles.listStyle,
@@ -57,42 +58,45 @@ class HistoryList extends Component {
     ];
 
     return (
-      <View style={styles.containerStyle}>
-        <List containerStyle={listStyles}>
-          {
-            this.getHistorylist().map((l, i) => (
-              <ListItem
-                leftIcon={{name: 'map-marker', type: 'font-awesome' , style: leftIconStyles}}
-                key={i}
-                title={l.date}
-                subtitle={l.subtitle}
-                titleStyle={itemTitleStyles}
-                chevron={false}
-                rightIcon={{name: 'map', type: 'font-awesome' , style: leftIconStyles}}
-                onPress={() => { this.setState({visible: true, selecetedHistory: l.selecetedHistory }) }}
-              />
-            ))
-          }
-        </List>
+      <View>
+        <Text style={styles.titleStyle}>{translate(lang, 'My History')}</Text>
+        <View style={styles.containerStyle}>
+          <List containerStyle={listStyles}>
+            {
+              this.getHistorylist().map((l, i) => (
+                <ListItem
+                  leftIcon={{name: 'map-marker', type: 'font-awesome' , style: leftIconStyles}}
+                  key={i}
+                  title={l.date}
+                  subtitle={l.subtitle}
+                  titleStyle={itemTitleStyles}
+                  chevron={false}
+                  rightIcon={{name: 'map', type: 'font-awesome' , style: leftIconStyles}}
+                  onPress={() => { this.setState({visible: true, selecetedHistory: l.selecetedHistory }) }}
+                />
+              ))
+            }
+          </List>
 
-        <Modal 
-          animationType="slide"
-          transparent={false}
-          visible={visible}
-          onRequestClose={() => {}}>
+          <Modal 
+            animationType="slide"
+            transparent={false}
+            visible={visible}
+            onRequestClose={() => {}}>
 
-          <HistoryDetails history={selecetedHistory} color={colorScheme}/>
+            <HistoryDetails history={selecetedHistory} color={colorScheme}/>
 
-          <Icon
-            raised
-            name='close'
-            type='font-awesome'
-            color={colorScheme}
-            size={24}
-            containerStyle={styles.buttonStyle}
-            onPress={() => this.hideModal()} />
+            <Icon
+              raised
+              name='close'
+              type='font-awesome'
+              color={colorScheme}
+              size={24}
+              containerStyle={styles.buttonStyle}
+              onPress={() => this.hideModal()} />
 
-        </Modal>
+          </Modal>
+        </View>
       </View>
     );
   }
@@ -105,4 +109,4 @@ export default connect(
   {
     removeHistory
   }
-)(HistoryList);
+)(withTranslation(HistoryList));

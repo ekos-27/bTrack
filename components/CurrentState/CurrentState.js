@@ -9,9 +9,13 @@ import { calculateDistance, formatSpeed } from '../../utils';
 
 import { connect } from 'react-redux';
 
+import { withTranslation } from '../../contexts/i18n';
+import translate from '../../dictionary';
+
 class CurentState extends Component {
   render() {
-    const { 
+    const {
+      lang,
       training: { status, startDate, track, currentCoords },
       settings: { colorScheme }
     } = this.props;
@@ -28,14 +32,14 @@ class CurentState extends Component {
     return (
       <View style={styles.containerStyle}>
         <View style={styles.rowStyle}>
-          <Text style={styles.titleStyle}>Current state</Text>
+          <Text style={styles.titleStyle}>{translate(lang, 'Current state')}</Text>
         </View>
         <View style={styles.rowStyle}>
-          <Text style={styles.labelStyle}>Status</Text>
-          <Text style={valueStyleList}>{ status ? 'STARTED' : '-'}</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Status')}</Text>
+          <Text style={valueStyleList}>{ status ? translate(lang, 'STARTED') : '-'}</Text>
         </View>
         <View style={styles.rowStyle}>
-          <Text style={styles.labelStyle}>Time</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Time')}</Text>
           <Timer
             style={valueStyleList}
             start={status}
@@ -43,12 +47,12 @@ class CurentState extends Component {
           />
         </View>
         <View style={styles.rowStyle}>
-          <Text style={styles.labelStyle}>Distance</Text>
-          <Text style={valueStyleList}>{ status ? calculateDistance(track, {unit: 'km'}) : 0 } km</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Distance')}</Text>
+          <Text style={valueStyleList}>{ status ? calculateDistance(track, {unit: 'km'}) : 0 } {translate(lang, 'km')}</Text>
         </View>
         <View style={styles.rowStyle}>
-          <Text style={styles.labelStyle}>Speed</Text>
-          <Text style={valueStyleList}>{formatSpeed(currentCoords.speed)} km/h</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Speed')}</Text>
+          <Text style={valueStyleList}>{formatSpeed(currentCoords.speed)} {translate(lang, 'km/h')}</Text>
         </View>
       </View>
     );
@@ -60,5 +64,5 @@ const mapStateToProps = ({ training, settings }) => ({ training, settings });
 export default connect(
   mapStateToProps,
   null
-)(CurentState);
+)(withTranslation(CurentState));
 

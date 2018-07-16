@@ -6,12 +6,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#ffffff',
   },
-  titleStyle: {
-    textAlign: 'center',
-    width: '100%',
-    color: '#aaaaaa',
-    paddingTop: 10,
-  },
 });
 
 export default styles;

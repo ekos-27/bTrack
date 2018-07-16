@@ -5,9 +5,12 @@ import styles from './styles';
 
 import { connect } from 'react-redux';
 
+import { withTranslation } from '../../contexts/i18n';
+import translate from '../../dictionary';
+
 class BestResultWidget extends Component {
   render() {
-    const { settings: { colorScheme } } = this.props;
+    const { lang, settings: { colorScheme } } = this.props;
 
     const colorStyle = {
       color: colorScheme
@@ -21,15 +24,15 @@ class BestResultWidget extends Component {
     return (
       <View style={styles.containerStyle}>
         <View style={styles.rowStyle}>
-          <Text style={styles.titleStyle}>Best results</Text>
+          <Text style={styles.titleStyle}>{translate(lang, 'Best results')}</Text>
         </View>
         <View style={styles.rowStyle}>
-          <Text style={styles.labelStyle}>Longest distance</Text>
-          <Text style={valueStyleList}>15 km</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Longest distance')}</Text>
+          <Text style={valueStyleList}>15 {translate(lang, 'km')}km</Text>
         </View>
         <View style={styles.rowStyle}>
-          <Text style={styles.labelStyle}>Max speed</Text>
-          <Text style={valueStyleList}>35 km/h</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Max speed')}</Text>
+          <Text style={valueStyleList}>35 {translate(lang, 'km/h')}</Text>
         </View>
       </View>
     );
@@ -41,4 +44,4 @@ const mapStateToProps = ({ settings }) => ({ settings });
 export default connect(
   mapStateToProps,
   null
-)(BestResultWidget);
+)(withTranslation(BestResultWidget));

@@ -6,9 +6,13 @@ import { formatSpeed } from '../../utils';
 
 import { connect } from 'react-redux';
 
+import { withTranslation } from '../../contexts/i18n';
+import translate from '../../dictionary';
+
 class MapSpeed extends Component {
   render() {
     const {
+      lang,
       training: { currentCoords },
       settings: { colorScheme }
     } = this.props;
@@ -21,7 +25,7 @@ class MapSpeed extends Component {
     return (
       <View style={styles.containerStyle}>
         <Text style={valueStyleList}>
-          {formatSpeed(currentCoords.speed)} km/h
+          {formatSpeed(currentCoords.speed)} {translate(lang, 'km/h')}
         </Text>
       </View>
     );
@@ -33,4 +37,4 @@ const mapStateToProps = ({ training, settings }) => ({ training, settings });
 export default connect(
   mapStateToProps,
   null
-)(MapSpeed);
+)(withTranslation(MapSpeed));

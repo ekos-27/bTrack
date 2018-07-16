@@ -8,14 +8,22 @@ import TrackScreen from '../screens/TrackScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import AccountScreen from '../screens/AccountScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import TabBarLabel from './TabBarLabel';
 
 import BottomTabBar from './BottomTabBar';
+
+const style = {
+  alignSelf: 'center',
+  fontSize: 12,
+};
 
 const MainNavigator = createBottomTabNavigator({
   HomeScreen: {
     screen: HomeScreen,
     navigationOptions: {
-      tabBarLabel: 'Home',
+      tabBarLabel: (props) => (
+        <TabBarLabel {...props} label={'Home'} style={style} />
+      ),
       tabBarIcon: ({tintColor}) => (
         <Icon name='home' color={tintColor} size={24} />
       ),
@@ -27,7 +35,9 @@ const MainNavigator = createBottomTabNavigator({
   TrackScreen: {
     screen: TrackScreen,
     navigationOptions: {
-      tabBarLabel: 'Track',
+      tabBarLabel: (props) => (
+        <TabBarLabel {...props} label={'Track'} style={style} />
+      ),
       tabBarIcon: ({tintColor}) => (
         <Icon name='directions-bike' color={tintColor} size={24} />
       )
@@ -36,7 +46,9 @@ const MainNavigator = createBottomTabNavigator({
   HistoryScreen: {
     screen: HistoryScreen,
     navigationOptions: {
-      tabBarLabel: 'History',
+      tabBarLabel: (props) => (
+        <TabBarLabel {...props} label={'History'} style={style} />
+      ),
       tabBarIcon: ({tintColor}) => (
         <Icon name='history' color={tintColor} size={24} />
       )
@@ -45,7 +57,9 @@ const MainNavigator = createBottomTabNavigator({
    SettingsScreen: {
       screen: SettingsScreen,
       navigationOptions: {
-        tabBarLabel: 'Settings',
+        tabBarLabel: (props) => (
+          <TabBarLabel {...props} label={'Settings'} style={style} />
+        ),
         tabBarIcon: ({tintColor}) => (
           <Icon name='settings' color={tintColor} size={24} />
         )
@@ -54,17 +68,6 @@ const MainNavigator = createBottomTabNavigator({
   },
   {
     tabBarComponent: BottomTabBar,
-    tabBarOptions: {
-      inactiveTintColor: 'grey',
-      style: {
-        backgroundColor: 'white',
-        //borderTopWhidth: 0,
-        shadowOffset: { width: 5, height: 3 },
-        shadowColor: 'black',
-        shadowOpacity: 0.5,
-        elevation: 5
-      }
-    }
   }
 );
 

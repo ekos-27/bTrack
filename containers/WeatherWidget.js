@@ -92,7 +92,6 @@ class WeatherWidgetContainer extends Component {
     this._stopTimer();
   }
 
-
   render() {
     const { data , validData } = this.state;
 

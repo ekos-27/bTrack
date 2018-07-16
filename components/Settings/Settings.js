@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Picker, Text, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
-
-import { colorSchemes } from '../../config';
-
+import { colorSchemes, languages } from '../../config';
 import styles from './styles';
 
 import { connect } from 'react-redux';
 import { 
-  changeName,
-  changeEmail,
-  chnageColorScheme
+  changeLanguage,
+  changeColorScheme
 } from '../../actions';
 
+import { withTranslation } from '../../contexts/i18n';
+import translate from '../../dictionary';
+
 class Settings extends Component {
-  getPickerItems = () => {
+  getColorSchemeItems = (lang) => {
     return Object.keys(colorSchemes).map((key) => {
-      return (<Picker.Item key={key} label={key} value={colorSchemes[key]} />);
+      return (<Picker.Item key={key} label={colorSchemes[key]} value={key} />);
+    });
+  };
+
+  getLanguageItems = (lang) => {
+    return Object.keys(languages).map((key) => {
+      return (<Picker.Item key={key} label={languages[key]} value={key} />);
     });
   };
 
   render() {
     const {
-      name,
-      email,
-      colorScheme
-    } = this.props.settings;
+      lang,
+      settings: { language, colorScheme }
+    } = this.props;
 
     const inputStyleList = [
       styles.inputStyle,
@@ -35,33 +40,27 @@ class Settings extends Component {
     return (
       <View style={styles.containerStyle}>
         <View style={styles.inputContainerStyle}>
-          <Text style={styles.labelStyle}>Your name</Text>
-          <TextInput
-            underlineColorAndroid='rgba(0,0,0,0)'
-            style={[...inputStyleList, styles.marginLeft10]}
-            onChangeText={name => this.props.changeName(name)}
-            value={name}
-          />
+          <Text style={styles.labelStyle}>{translate(lang, 'Language')}</Text>
+          <Picker
+            selectedValue={language}
+            style={inputStyleList}
+            onValueChange={(itemValue, itemIndex) => this.props.changeLanguage(itemValue)}>
+
+            { this.getLanguageItems(lang) }
+
+          </Picker>
         </View>
 
         <View style={styles.inputContainerStyle}>
-          <Text style={styles.labelStyle}>Your email</Text>
-          <TextInput
-            underlineColorAndroid='rgba(0,0,0,0)'
-            style={[...inputStyleList, styles.marginLeft10]}
-            onChangeText={email => this.props.changeEmail(email)}
-            value={email}
-          />
-        </View>
-
-        <View style={styles.inputContainerStyle}>
-          <Text style={styles.labelStyle}>Color scheme</Text>
+          <Text style={styles.labelStyle}>{translate(lang, 'Color scheme')}</Text>
           <Picker
             selectedValue={colorScheme}
             style={inputStyleList}
-            onValueChange={(itemValue, itemIndex) => this.props.chnageColorScheme(itemValue)}>
+            onValueChange={(itemValue, itemIndex) =>
+              console.log(colorScheme, itemValue) || this.props.changeColorScheme(itemValue)
+            }>
 
-            { this.getPickerItems() }
+            { this.getColorSchemeItems(lang) }
 
           </Picker>
         </View>
@@ -75,8 +74,7 @@ const mapStateToProps = ({ settings }) => ({ settings });
 export default connect(
   mapStateToProps,
   {
-    changeName,
-    changeEmail,
-    chnageColorScheme
+    changeLanguage,
+    changeColorScheme
   }
-)(Settings);
+)(withTranslation(Settings));

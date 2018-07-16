@@ -17,6 +17,12 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
   },
+  titleStyle: {
+    textAlign: 'center',
+    width: '100%',
+    color: '#aaaaaa',
+    paddingTop: 10,
+  },
 });
 
 export default styles;
