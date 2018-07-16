@@ -19,5 +19,4 @@ export default {
   'Max speed': 'Максимальная скорость',
   'Start': 'Начать',
   'Finish': 'Завершить',
-  'Green': 'Зеленый',
 };

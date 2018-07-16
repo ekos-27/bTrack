@@ -19,12 +19,4 @@ export default {
   'Max speed': 'Max speed',
   'Start': 'Start',
   'Finish': 'Finish',
-  'Green': 'Green',
-  'Orange': 'Orange',
-  'Blue': 'Blue',
-  'Red': 'Red',
-  'English': 'English',
-  'Russian': 'Russian',
-  'en': 'en',
-  'ru': 'ru',
 };
