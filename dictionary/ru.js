@@ -19,4 +19,6 @@ export default {
   'Max speed': 'Максимальная скорость',
   'Start': 'Начать',
   'Finish': 'Завершить',
+  'Show map': 'Показать карту',
+  'Remove item': 'Удалите запись',
 };

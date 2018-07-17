@@ -14,7 +14,9 @@ export default (state = initialState, action) => {
       ];
     }
     case REMOVE_HISTORY: {
-      return state;
+      const { startDate, endDate } = action.payload;
+
+      return state.filter(i => !(i.startDate === startDate && i.endDate == endDate));
     }
     default:
       return state;

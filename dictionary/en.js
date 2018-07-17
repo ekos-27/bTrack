@@ -19,4 +19,6 @@ export default {
   'Max speed': 'Max speed',
   'Start': 'Start',
   'Finish': 'Finish',
+  'Show map': 'Show map',
+  'Remove item': 'Remove item',
 };

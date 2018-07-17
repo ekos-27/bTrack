@@ -17,12 +17,30 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
   },
+  buttonCloseSubMenuStyle: {
+    position: 'absolute',
+    top: 3,
+    right: 3,
+  },
   titleStyle: {
     textAlign: 'center',
     width: '100%',
     color: '#aaaaaa',
     paddingTop: 10,
   },
+  subMenuStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  subMenuContainerStyle: {
+    backgroundColor: '#eeeeee',
+    padding: 40,
+  },
+  subMenuButtonStyle: {
+    marginTop: 10,
+  }
 });
 
 export default styles;

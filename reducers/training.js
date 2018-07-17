@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  starDate: null,
+  startDate: null,
   endDate: null,
   status: false,
   track: [],

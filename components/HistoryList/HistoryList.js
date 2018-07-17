@@ -17,7 +17,8 @@ import {
 
 class HistoryList extends Component {
   state = {
-    visible: false,
+    detailsVisible: false,
+    subMenuVisible: false,
     selecetedHistory: null,
   }
 
@@ -35,11 +36,18 @@ class HistoryList extends Component {
   };
 
   hideModal = () => {
-    this.setState({'visible': false, selecetedHistory: null});
+    this.setState({'detailsVisible': false, 'subMenuVisible': false});
+  };
+
+  onPressRemoveButton = () => {
+    const { selecetedHistory } = this.state;
+
+    this.setState({'subMenuVisible': false});
+    this.props.removeHistory(selecetedHistory);
   };
 
   render() {
-    const { visible, selecetedHistory } = this.state;
+    const { detailsVisible, subMenuVisible, selecetedHistory } = this.state;
     const { lang, settings: { colorScheme } } = this.props;
 
     const listStyles = [
@@ -72,7 +80,20 @@ class HistoryList extends Component {
                   titleStyle={itemTitleStyles}
                   chevron={false}
                   rightIcon={{name: 'map', type: 'font-awesome' , style: leftIconStyles}}
-                  onPress={() => { this.setState({visible: true, selecetedHistory: l.selecetedHistory }) }}
+                  onPressRightIcon={() => {
+                    this.setState({
+                      detailsVisible: true,
+                      subMenuVisible: false,
+                      selecetedHistory: l.selecetedHistory
+                    }); 
+                  }}
+                  onPress={() => {
+                    this.setState({
+                      detailsVisible: false,
+                      subMenuVisible: true,
+                      selecetedHistory: l.selecetedHistory
+                    }); 
+                  }}
                 />
               ))
             }
@@ -81,7 +102,7 @@ class HistoryList extends Component {
           <Modal 
             animationType="slide"
             transparent={false}
-            visible={visible}
+            visible={detailsVisible}
             onRequestClose={() => {}}>
 
             <HistoryDetails history={selecetedHistory} color={colorScheme}/>
@@ -94,6 +115,39 @@ class HistoryList extends Component {
               size={24}
               containerStyle={styles.buttonStyle}
               onPress={() => this.hideModal()} />
+
+          </Modal>
+
+          <Modal 
+            animationType="slide"
+            transparent={true}
+            visible={subMenuVisible}
+            onRequestClose={() => {}}>
+
+            <View style={styles.subMenuStyle}>
+              <View style={styles.subMenuContainerStyle}>
+                <Button
+                  onPress={() => (this.setState({'detailsVisible': true, 'subMenuVisible': false}))}
+                  buttonStyle={styles.subMenuButtonStyle}
+                  icon={{name: 'map', type: 'font-awesome' , style: leftIconStyles}}
+                  title={translate(lang, 'Show map')} />
+
+                <Button
+                  onPress={this.onPressRemoveButton}
+                  buttonStyle={styles.subMenuButtonStyle}
+                  icon={{name: 'trash', type: 'font-awesome' , style: leftIconStyles}}
+                  title={translate(lang, 'Remove item')} />
+
+                <Icon
+                  raised
+                  name='close'
+                  type='font-awesome'
+                  color={colorScheme}
+                  size={15}
+                  containerStyle={styles.buttonCloseSubMenuStyle}
+                  onPress={() => this.hideModal()} />
+              </View>
+            </View>
 
           </Modal>
         </View>
