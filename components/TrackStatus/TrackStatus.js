@@ -17,14 +17,15 @@ import translate from '../../dictionary';
 import { 
   startTraining,
   finishTraining,
-  addHistory
+  addHistory,
+  changeLongestDistance
 } from '../../actions';
 
 class TrackStatus extends Component {
 
   onPressButton = () => {
     const {
-      training: { status, startDate, endDate }
+      training: { status, startDate, endDate, track }
     } = this.props;
 
     if (!status) {
@@ -40,6 +41,7 @@ class TrackStatus extends Component {
 
       this.props.finishTraining(finishState);
       this.props.addHistory({...this.props.training, ...finishState});
+      this.props.changeLongestDistance(calculateDistance(track, {unit: 'km'}));
     }
   };
 
@@ -100,6 +102,7 @@ export default connect(
   {
     startTraining,
     finishTraining,
-    addHistory
+    addHistory,
+    changeLongestDistance
   }
 )(withTranslation(TrackStatus));

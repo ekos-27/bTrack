@@ -10,7 +10,11 @@ import translate from '../../dictionary';
 
 class BestResultWidget extends Component {
   render() {
-    const { lang, settings: { colorScheme } } = this.props;
+    const {
+      lang,
+      settings: { colorScheme },
+      bestResults: { maxSpeed, longestDistance }
+    } = this.props;
 
     const colorStyle = {
       color: colorScheme
@@ -28,18 +32,18 @@ class BestResultWidget extends Component {
         </View>
         <View style={styles.rowStyle}>
           <Text style={styles.labelStyle}>{translate(lang, 'Longest distance')}</Text>
-          <Text style={valueStyleList}>15 {translate(lang, 'km')}km</Text>
+          <Text style={valueStyleList}>{ longestDistance } {translate(lang, 'km')}</Text>
         </View>
         <View style={styles.rowStyle}>
           <Text style={styles.labelStyle}>{translate(lang, 'Max speed')}</Text>
-          <Text style={valueStyleList}>35 {translate(lang, 'km/h')}</Text>
+          <Text style={valueStyleList}>{ maxSpeed } {translate(lang, 'km/h')}</Text>
         </View>
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ settings }) => ({ settings });
+const mapStateToProps = ({ settings, bestResults }) => ({ settings, bestResults });
 
 export default connect(
   mapStateToProps,

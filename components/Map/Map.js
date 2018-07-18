@@ -8,6 +8,7 @@ import styles from './styles';
 import { connect } from 'react-redux';
 import { 
   changePosition,
+  changeMaxSpeed,
 } from '../../actions';
 
 const { width, height } = Dimensions.get('window');
@@ -37,13 +38,16 @@ class Map extends Component {
       let coords = {
         latitude: 0,
         longitude: 0,
+        speed: 0,
       };
   
       if (location) {
         coords = { ...location.coords };
       }
+      const { speed } = coords;
 
       this.props.changePosition(coords);
+      this.props.changeMaxSpeed,(speed);
     });
   }
 
@@ -88,6 +92,7 @@ const mapStateToProps = ({ training, settings }) => ({ training, settings });
 export default connect(
   mapStateToProps,
   {
-    changePosition
+    changePosition,
+    changeMaxSpeed
   }
 )(Map);
