@@ -1,6 +1,6 @@
 export const colorSchemes = {
-  green: 'Green',
+  mediumseagreen: 'Green',
   orange: 'Orange',
-  blue: 'Blue',
-  red: 'Red',
+  skyblue: 'Blue',
+  lightcoral: 'Red',
 };
