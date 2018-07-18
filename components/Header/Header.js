@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Text, Icon } from 'react-native-elements';
+import { Text, Icon, Header } from 'react-native-elements';
 import styles from './styles';
 
 import { connect } from 'react-redux';
 
-class Header extends Component {
+class AppHeader extends Component {
   render() {
 
     const {
@@ -23,10 +23,11 @@ class Header extends Component {
     ];
 
     return (
-      <View style={styles.containerStyle}>
-        <Icon name="directions-bike" iconStyle={iconStyles} />
-        <Text h4 style={labelStyles}>bTrack</Text>
-      </View>
+      <Header
+        backgroundColor={colorScheme}
+        leftComponent={{ icon: 'directions-bike', color: '#fff' }}
+        centerComponent={{ text: 'bTrack', style: styles.labelStyle }}
+      />
     );
   }
 }
@@ -36,4 +37,4 @@ const mapStateToProps = ({ settings }) => ({ settings });
 export default connect(
   mapStateToProps,
   null
-)(Header);
+)(AppHeader);

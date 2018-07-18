@@ -44,6 +44,7 @@ class Map extends Component {
       if (location) {
         coords = { ...location.coords };
       }
+
       const { speed } = coords;
 
       this.props.changePosition(coords);

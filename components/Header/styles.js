@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   labelStyle: {
+    color: 'white',
+    fontSize: 24,
   }
 });
 
