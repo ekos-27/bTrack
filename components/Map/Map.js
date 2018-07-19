@@ -54,7 +54,7 @@ class Map extends Component {
 
   render() {
     const {
-      training: { currentCoords, track },
+      training: { currentCoords, track, status },
       settings: { colorScheme }
     } = this.props;
 
@@ -74,15 +74,32 @@ class Map extends Component {
             strokeColor={colorScheme}
             coordinates={track} />
 
+          {
+            status && track[0] ? (
+              <Marker 
+              anchor={{x: 0.5, y: 0.5}}
+                title="Start"
+                coordinate={{
+                  latitude: track[0].latitude,
+                  longitude: track[0].longitude
+                }}>
+                <Icon 
+                  name='fiber-manual-record'
+                  color={colorScheme}
+                  size={24} />
+              </Marker>
+            ) : null
+          }
+
           <Marker.Animated coordinate={{
             latitude: currentCoords.latitude,
             longitude: currentCoords.longitude
           }}>
 
-          <Icon name='directions-bike'
-            color={colorScheme}
-            size={24} />
-        </Marker.Animated>
+            <Icon name='directions-bike'
+              color={colorScheme}
+              size={24} />
+          </Marker.Animated>
       </MapView>
     );
   }
