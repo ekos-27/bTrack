@@ -48,7 +48,7 @@ class Map extends Component {
       const { speed } = coords;
 
       this.props.changePosition(coords);
-      this.props.changeMaxSpeed,(speed);
+      this.props.changeMaxSpeed(speed);
     });
   }
 
