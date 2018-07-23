@@ -8,7 +8,8 @@ import reducers from '../reducers';
 const persistConfig = {
   key: 'root',
   storage: storage,
-  stateReconciler: autoMergeLevel1
+  stateReconciler: autoMergeLevel1,
+  blacklist: ['training'],
  };
  
  const pReducer = persistReducer(persistConfig, reducers);

@@ -5,6 +5,8 @@ import MapView, { Marker, Polyline, UrlTile } from 'react-native-maps';
 import { Constants, Location, Permissions } from 'expo';
 import styles from './styles';
 
+import { formatSpeed } from '../../utils';
+
 import { connect } from 'react-redux';
 import { 
   changePosition,
@@ -48,7 +50,7 @@ class Map extends Component {
       const { speed } = coords;
 
       this.props.changePosition(coords);
-      this.props.changeMaxSpeed(speed);
+      this.props.changeMaxSpeed(formatSpeed(speed));
     });
   }
 
